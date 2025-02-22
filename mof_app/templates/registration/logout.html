@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Studios | Home</title>
+    <style>
+        /* Import Marvel-Like Font */
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+        /* Body Styling */
+        body {
+            font-family: 'Bebas Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+            background: url('https://wallpaperaccess.com/full/327097.jpg') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Main Title */
+        h1 {
+            font-size: 60px;
+            letter-spacing: 3px;
+            text-shadow: 3px 3px 15px rgba(255, 0, 0, 0.8);
+            animation: scaleUp 1.5s ease-in-out;
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Subtitle */
+        p {
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(255, 204, 0, 0.8);
+            margin-top: -10px;
+            letter-spacing: 1px;
+        }
+
+        /* Glowing Button */
+        .btn {
+            background: linear-gradient(45deg, #d50000, #ffcc00);
+            color: white;
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 2px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+            transition: 0.3s;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        /* Glowing Effect */
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(255, 0, 0, 0.7); }
+            to { box-shadow: 0 0 20px rgba(255, 204, 0, 1); }
+        }
+
+        /* Button Hover */
+        .btn:hover {
+            background: linear-gradient(45deg, #ffcc00, #d50000);
+            box-shadow: 0 0 25px rgba(255, 204, 0, 1);
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>MARVEL STUDIOS</h1>
+    <p>Welcome to the Cinematic Universe</p>
+    <button class="btn" onclick="window.location.href='login.html'">Enter the Universe</button>
+
+    <div class="footer">
+        &copy; 2025 Marvel Studios. All rights reserved.
+    </div>
+
+</body>
+</html>

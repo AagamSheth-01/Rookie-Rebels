@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Movie Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+        body {
+            font-family: 'Bangers', cursive;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: linear-gradient(90deg, #ff0000, #d40000);
+            padding: 15px;
+            font-size: 28px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.5);
+        }
+        header h1 {
+            text-shadow: 3px 3px 0px black;
+        }
+        header a {
+            text-decoration: none;
+            color: white;
+            background-color: #ffcc00;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        header a:hover {
+            background-color: #ffea00;
+        }
+        .movie-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+        .movie-card {
+            background: #222;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
+            transition: 0.3s;
+            position: relative;
+        }
+        .movie-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 0px 25px rgba(255, 0, 0, 0.8);
+        }
+        .movie-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid red;
+        }
+        .movie-card h2 {
+            margin: 10px 0;
+            color: #ffcc00;
+            text-shadow: 2px 2px 0px black;
+        }
+        .movie-card p {
+            font-size: 16px;
+            color: #ddd;
+        }
+        .form-container {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
+        }
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .form-container button {
+            width: 100%;
+            background: #ffcc00;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        .form-container button:hover {
+            background: #ffea00;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Marvel Movie Dashboard</h1>
+        <a href="{% url 'add_movie' %}" class="add-movie-btn">➕ Add Movie</a>
+    </header>
+    <main>
+        <div class="movie-container" id="movieContainer">
+            {% for movie in movies %}
+            <div class="movie-card">
+                <img src="{{ movie.image_url }}" alt="{{ movie.name }} Poster">
+                <h2>{{ movie.name }}</h2>
+                <p><strong>Director:</strong> {{ movie.director }}</p>
+                <p><strong>Budget:</strong> ${{ movie.budget }}M</p>
+                <a href="{% url 'delete_movie' movie.id %}">Delete</a>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>

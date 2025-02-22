@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome, {{ username }}!</h1>
+    <p>Current Date & Time: {{ current_time }}</p>
+
+    <h2>Notifications</h2>
+    <ul>
+        {% if notifications %}
+            {% for notification in notifications %}
+                <li>{{ notification }}</li>
+            {% endfor %}
+        {% else %}
+            <p>No new notifications.</p>
+        {% endif %}
+    </ul>
+</body>
+</html>

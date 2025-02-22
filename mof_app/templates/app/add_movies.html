@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Marvel Movie</title>
+    <link rel="stylesheet" href="add_movies_style.css">
+</head>
+<body>
+    <header>
+        <h1>Add a New Marvel Movie</h1>
+        <a href="{% url 'add_movie' %}" class="back-btn">⬅ Back to Dashboard</a>
+    </header>
+
+    <div class="form-container">
+        <input type="text" id="movieName" placeholder="Movie Name" required>
+        <input type="text" id="director" placeholder="Director" required>
+        <input type="text" id="budget" placeholder="Budget (in $M)" required>
+        <input type="text" id="imageUrl" placeholder="Image URL" required>
+        <button id="addMovieBtn">Add Movie</button>
+    </div>
+
+    
+</body>
+</html>
