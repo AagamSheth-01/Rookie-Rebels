@@ -13,6 +13,7 @@ urlpatterns = [
    path('verify/<int:user_id>/', verify_email, name='verify_email'), 
    path('dashboard/', views.dashboard, name='dashboard'),
    path('add_movies/', views.add_movie, name='add_movie'),
+   path('delete_movie/<int:movie_id>/', views.delete_movie, name='delete_movie'), 
    
    
 

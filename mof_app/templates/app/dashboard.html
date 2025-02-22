@@ -124,7 +124,8 @@
                 <h2>{{ movie.name }}</h2>
                 <p><strong>Director:</strong> {{ movie.director }}</p>
                 <p><strong>Budget:</strong> ${{ movie.budget }}M</p>
-                <a href="{% url 'delete_movie' movie.id %}">Delete</a>
+                <a href="{% url 'delete_movie' movie.id %}" class="delete-btn">Delete</a>
+
             </div>
             {% endfor %}
         </div>
