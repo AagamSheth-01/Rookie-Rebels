@@ -71,6 +71,19 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Expense(models.Model):
+        movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='expenses')
+        category = models.CharField(max_length=255, choices=[
+            ('Preproduction', 'Preproduction'),
+            ('Shooting', 'Shooting'),
+            ('Postproduction', 'Postproduction'),
+            ('Promotions', 'Promotions'),
+        ])
+        amount = models.DecimalField(max_digits=10, decimal_places=2)
+        
+        def __str__(self):
+            return f"{self.movie.name} - {self.category} - ${self.amount}M"
 
 # Run migrations to create the table in MySQL:
 # 1. python manage.py makemigrations

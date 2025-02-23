@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import verify_email, profile, budget_comparison
+from .views import verify_email, profile, budget_comparison, movie_detail
 from django.urls import path,include
 
 
@@ -26,6 +26,10 @@ urlpatterns = [
    path('redi/<int:id>/', views.redi, name='redi'),
    path('profile/', views.profile, name='profile'),
    path('movies/', views.movie_list, name='movie_list'), 
+
+   path('', views.movie_list, name='movie_list'),
+   path('movie/<int:id>/', movie_detail, name='movie_detail'),
+   path('movie/<int:movie_id>/add_expense/', views.add_expense, name='add_expense'),
 
 
     

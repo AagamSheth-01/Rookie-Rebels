@@ -8,7 +8,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
-from .models import Usr_prof
+from .models import Usr_prof, Expense
 from datetime import datetime
 from .models import Movie
 from django.core.cache import cache
@@ -197,9 +197,7 @@ def home(request):
     })
 
 
-def movie_detail(request, id):
-    movie = get_object_or_404(Movie, id=id)
-    return render(request, 'app/redi.html', {'movie': movie})
+
 
 from django.shortcuts import render, get_object_or_404
 
@@ -210,7 +208,26 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 from django.contrib.auth.decorators import login_required
 
+def movie_list(request):
+    movies = Movie.objects.all()
+    return render(request, 'app/redi.html', {'movies': movies})
 
+def movie_detail(request, movie_id):
+    movie = get_object_or_404(Movie,id=movie_id)
+    expenses = Expense.objects.filter(movie=movie)
+    return render(request, 'app/redi.html', {'movie': movie, 'expenses': expenses})
+
+
+def add_expense(request, movie_id):
+    if request.method == "POST":
+        movie = get_object_or_404(Movie, id=movie_id)
+        category = request.POST.get("category")
+        amount = request.POST.get("amount")
+        
+        if category and amount:
+            Expense.objects.create(movie=movie, category=category, amount=float(amount))
+        
+        return redirect('movie_detail', movie_id=movie_id)
 
 
 

@@ -6,6 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add a Marvel Movie</title>
     <link rel="stylesheet" href="{% static 'css/appstyles.css' %}">
+    <style>
+        /* Genre Selection Container */
+        .genre-container {
+            text-align: left;
+            margin-top: 15px;
+            padding: 16px;
+            background: #2b2b2b; /* Lighter dark mode background */
+            border-radius: 14px; /* Smooth rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid #555;
+        }
+
+        /* Genre Title */
+        .genre-container legend {
+            font-weight: bold;
+            color: #ddd;
+            margin-bottom: 8px;
+            padding: 5px 10px;
+            border-radius: 8px;
+            background: #3a3a3a; /* Slightly lighter legend background */
+        }
+
+        /* Checkboxes Grid */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        /* Individual Checkbox Label */
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #3a3a3a;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            color: #fff;
+        }
+
+        .checkbox-group label:hover {
+            background: #4a4a4a;
+        }
+
+        /* Custom Checkbox Styling */
+        .checkbox-group input[type="checkbox"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00bcd4;
+            border-radius: 6px;
+            background: transparent;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            position: relative;
+        }
+
+        /* Checkbox Checked State */
+        .checkbox-group input[type="checkbox"]:checked {
+            background-color: #00bcd4;
+            border: 2px solid #00bcd4;
+        }
+
+        .checkbox-group input[type="checkbox"]:checked::after {
+            content: "✔";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -18,24 +97,17 @@
             <input type="text" name="movieName" placeholder="Movie Name" required>
             <input type="text" name="director" placeholder="Director" required>
             <input type="number" name="budget" placeholder="Budget (in $M)" required>
-            <label class="block">
-                <input type="checkbox" name="genre" value="action"> Action
-            </label>
-            <label class="block">
-                <input type="checkbox" name="genre" value="comedy"> Comedy
-            </label>
-            <label class="block">
-                <input type="checkbox" name="genre" value="drama"> Drama
-            </label>
-            <label class="block">
-                <input type="checkbox" name="genre" value="horror"> Horror
-            </label>
-            <label class="block">
-                <input type="checkbox" name="genre" value="sci-fi"> Sci-Fi
-            </label>
-            <label class="block">
-                <input type="checkbox" name="genre" value="romance"> Romance
-            </label>
+            <fieldset class="genre-container">
+                <legend>Select Genre(s)</legend>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="genre" value="action"> Action</label>
+                    <label><input type="checkbox" name="genre" value="comedy"> Comedy</label>
+                    <label><input type="checkbox" name="genre" value="drama"> Drama</label>
+                    <label><input type="checkbox" name="genre" value="horror"> Horror</label>
+                    <label><input type="checkbox" name="genre" value="sci-fi"> Sci-Fi</label>
+                    <label><input type="checkbox" name="genre" value="romance"> Romance</label>
+                </div>
+            </fieldset>
             <input type="number" name="budget" placeholder="Budget (in $M)" required>
             <input type="url" name="imageUrl" placeholder="Image URL" required>
             <button type="submit">Add Movie</button>
