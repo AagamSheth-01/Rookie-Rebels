@@ -1,90 +1,41 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add a Marvel Movie</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
-        body {
-            font-family: 'Bangers', cursive;
-            background-color: #1a1a1a;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        header {
-            background: linear-gradient(90deg, #ff0000, #d40000);
-            padding: 15px;
-            font-size: 28px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.5);
-        }
-        header h1 {
-            text-shadow: 3px 3px 0px black;
-        }
-        header a {
-            text-decoration: none;
-            color: white;
-            background-color: #ffcc00;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-size: 18px;
-            transition: 0.3s;
-            font-weight: bold;
-        }
-        header a:hover {
-            background-color: #ffea00;
-        }
-        .form-container {
-            background: #222;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 400px;
-            margin: auto;
-            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
-        }
-        .form-container input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .form-container button {
-            width: 100%;
-            background: #ffcc00;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
-        .form-container button:hover {
-            background: #ffea00;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/appstyles.css' %}">
 </head>
 <body>
     <header>
-        <h1>Add a New Marvel Movie</h1>
+        <h1>WORST Movies</h1>
         <a href="{% url 'dashboard' %}" class="back-btn">⬅ Back to Dashboard</a>
     </header>
-
     <div class="form-container">
         <form method="post" action="{% url 'add_movie' %}">
             {% csrf_token %}
             <input type="text" name="movieName" placeholder="Movie Name" required>
             <input type="text" name="director" placeholder="Director" required>
+            <input type="number" name="budget" placeholder="Budget (in $M)" required>
+            <label class="block">
+                <input type="checkbox" name="genre" value="action"> Action
+            </label>
+            <label class="block">
+                <input type="checkbox" name="genre" value="comedy"> Comedy
+            </label>
+            <label class="block">
+                <input type="checkbox" name="genre" value="drama"> Drama
+            </label>
+            <label class="block">
+                <input type="checkbox" name="genre" value="horror"> Horror
+            </label>
+            <label class="block">
+                <input type="checkbox" name="genre" value="sci-fi"> Sci-Fi
+            </label>
+            <label class="block">
+                <input type="checkbox" name="genre" value="romance"> Romance
+            </label>
             <input type="number" name="budget" placeholder="Budget (in $M)" required>
             <input type="url" name="imageUrl" placeholder="Image URL" required>
             <button type="submit">Add Movie</button>

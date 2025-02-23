@@ -186,7 +186,20 @@
             <button type="submit">Register</button>
 
             <p>Already have an account? <a class="link" href="{% url 'login' %}">Login</a></p>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+   <script>
+    setTimeout(() => {
+    document.querySelectorAll('.message').forEach(msg => msg.style.display = 'none');
+}, 3000);
 
+   </script>
                 
           
         </form>

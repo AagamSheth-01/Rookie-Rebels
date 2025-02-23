@@ -55,7 +55,7 @@ ROOT_URLCONF = 'mof.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],
+        'DIRS': [BASE_DIR / 'mof_app/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'mof.wsgi.application'
 DATABASES = {
     'default': {
    'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mof',
+        'NAME': 'dummof',
         'USER': 'root',
         'PASSWORD': '123456789root@U',  
         'HOST': '127.0.0.1',
@@ -142,3 +142,18 @@ EMAIL_HOST_USER = "uttamvadher44@gmail.com"
 EMAIL_HOST_PASSWORD = "srpg dshj lpzq gcmt"
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+AUTH_USER_MODEL = 'mof_app.Usr_prof'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = "dashboard"  # Redirects to dashboard after login
+
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: "debug",
+    messages.INFO: "info",
+    messages.SUCCESS: "success",
+    messages.WARNING: "warning",
+    messages.ERROR: "danger",
+}

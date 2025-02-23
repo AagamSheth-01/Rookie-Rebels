@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Edit Movie: {{ movie.name }}</h1>
+    <p><strong>Director:</strong> {{ movie.director }}</p>
+    <p><strong>Budget:</strong> ${{ movie.budget }}M</p>
+    
+    <a href="{% url 'delete_movie' movie.id %}" class="delete-btn">Delete Movie</a>
+{% endblock %}

@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    background: linear-gradient(135deg, #1e1e2e, #16213e);
+    overflow-x: hidden;
+}
+
+/* 🔥 Elegant Sticky Header */
+header {
+    background: rgba(10, 10, 10, 0.85);
+    padding: 15px 25px;
+    font-size: 24px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    backdrop-filter: blur(12px);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease-in-out;
+}
+
+/* 🎨 Header Hover Effect */
+header:hover {
+    background: rgba(10, 10, 10, 0.95);
+}
+
+/* 🎯 Professional Hyperlinks */
+a {
+    text-decoration: none;
+    color: #00bcd4;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 18px;
+}
+
+/* 🔥 Hyperlink Hover Effect */
+a:hover {
+    color: white;
+    background: linear-gradient(135deg, #00bcd4, #008cff);
+    box-shadow: 0px 4px 12px rgba(0, 188, 212, 0.3);
+    transform: translateY(-2px);
+}
+
+/* ✅ Active Hyperlink */
+a:active {
+    transform: scale(0.95);
+    box-shadow: 0px 3px 10px rgba(0, 188, 212, 0.4);
+}
+
+/* 🎥 Movie Card Container */
+.movie-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* 🎬 Movie Cards - Improved Alignment */
+.movie-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+    backdrop-filter: blur(8px);
+    box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.8s ease-in-out both;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* 🔳 Ensure Uniform Image Sizes */
+.movie-card img {
+    width: 100%;
+    height: 250px; /* Consistent height for all images */
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* ✨ Movie Card Title & Description */
+.movie-card h3 {
+    margin: 15px 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.movie-card p {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* 🌌 Particle Animation */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: floatParticles linear infinite;
+}
+
+@keyframes floatParticles {
+    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+    50% { transform: translateY(-60px) scale(1.2); opacity: 0.3; }
+    100% { transform: translateY(0) scale(1); opacity: 0.8; }
+}
+
+/* 📝 Improved Form Alignment */
+.form-container {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 400px;
+    margin: 40px auto;
+    backdrop-filter: blur(12px);
+    box-shadow: 0px 10px 25px rgba(255, 255, 255, 0.2);
+    animation: fadeIn 1s ease-in-out both;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* 📋 Input Fields - Perfectly Aligned */
+.form-container input {
+    width: 95%;
+    padding: 14px;
+    margin: 10px 0;
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.form-container input:focus {
+    outline: none;
+    border-color: #00bcd4;
+    box-shadow: 0px 5px 15px rgba(0, 188, 212, 0.3);
+}
+
+/* 🔘 Button - Right Aligned & Stylish */
+.form-container button {
+    width: 95%;
+    background: linear-gradient(135deg, #00bcd4, #008cff);
+    border: none;
+    padding: 14px 22px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    float: right;
+}
+
+/* ✨ Button Hover Effect */
+.form-container button:hover {
+    background: linear-gradient(135deg, #008cff, #0056b3);
+    transform: translateY(-3px);
+    box-shadow: 0px 8px 20px rgba(0, 188, 212, 0.3);
+}
+
+/* ✅ Active Button Effect */
+.form-container button:active {
+    transform: scale(0.96);
+}
+
+/* ✨ Smooth Fade-In Animation */
+@keyframes fadeIn {
+    0% { transform: translateY(-20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    position: relative;
+}
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.modal input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.save-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+}
+.logout-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: none;
+}

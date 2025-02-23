@@ -5,130 +5,382 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marvel Movie Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/appstyles.css' %}">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
         body {
-            font-family: 'Bangers', cursive;
-            background-color: #1a1a1a;
-            color: #fff;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            text-align: center;
+            background-color: #121212;
+            color: #fff;
         }
         header {
-            background: linear-gradient(90deg, #ff0000, #d40000);
-            padding: 15px;
-            font-size: 28px;
-            color: white;
+            background-color: #1f1f1f;
+            padding: 15px 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.5);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
-        header h1 {
-            text-shadow: 3px 3px 0px black;
+        .nav-container {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            justify-content: center;
         }
-        header a {
+        .nav-links a {
+            color: #fff;
             text-decoration: none;
-            color: white;
-            background-color: #ffcc00;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-size: 18px;
-            transition: 0.3s;
+            margin: 0 10px;
+            font-size: 16px;
             font-weight: bold;
+            transition: color 0.3s;
         }
-        header a:hover {
-            background-color: #ffea00;
+        .nav-links a:hover {
+            color: #ff9800;
         }
-        .movie-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            max-width: 1100px;
-            margin: auto;
+        .search-bar {
+            flex-grow: 1;
+            max-width: 250px;
+            margin-left: 15px;
         }
-        .movie-card {
-            background: #222;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
-            transition: 0.3s;
-            position: relative;
-        }
-        .movie-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 0px 25px rgba(255, 0, 0, 0.8);
-        }
-        .movie-card img {
+        .search-bar input {
             width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid red;
-        }
-        .movie-card h2 {
-            margin: 10px 0;
-            color: #ffcc00;
-            text-shadow: 2px 2px 0px black;
-        }
-        .movie-card p {
-            font-size: 16px;
-            color: #ddd;
-        }
-        .form-container {
-            background: #222;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 400px;
-            margin: auto;
-            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
-        }
-        .form-container input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 8px;
+            border-radius: 15px;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
+            font-size: 14px;
+            background-color: #333;
+            color: #fff;
+            padding-left: 10px;
         }
-        .form-container button {
-            width: 100%;
-            background: #ffcc00;
+        .profile-btn {
+            background-color: #ff9800;
             border: none;
-            padding: 10px 15px;
+            padding: 12px 30px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
             cursor: pointer;
+            transition: background 0.3s;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        .profile-btn:hover {
+            background-color: #e68900;
+        }
+        .sidebar {
+            width: 220px;
+            height: 100vh;
+            position: fixed;
+            background: #181818;
+            padding-top: 20px;
+            top: 60px;
+            overflow-y: auto;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 12px;
+            text-decoration: none;
             font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
-            margin-top: 10px;
-            transition: 0.3s;
+            transition: background 0.3s;
         }
-        .form-container button:hover {
-            background: #ffea00;
+        .sidebar a:hover {
+            background: #333;
         }
+        .content {
+            margin-left: 240px;
+            padding: 80px 15px 20px;
+        }
+       /* Movie Grid */
+.movie-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* 🎥 Movie Cards */
+.movie-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* ✨ Movie Card Glow Effect */
+.movie-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    backdrop-filter: blur(10%);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.8s ease-in-out both;
+}
+
+/* ✨ Dynamic Moving Background for Cards */
+.movie-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 10%, transparent 60%);
+    opacity: 0.5;
+    animation: cardGlowAnimation 4s infinite alternate ease-in-out;
+    z-index: -1;
+}
+
+@keyframes cardGlowAnimation {
+    0% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.movie-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+}
+
+
+.movie-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.particles-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -1; /* Keep it in the background */
+}
+
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: float 10s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) translateX(0); opacity: 0.8; }
+    50% { transform: translateY(-100px) translateX(50px); opacity: 0.3; }
+    100% { transform: translateY(0) translateX(0); opacity: 0.8; }
+}
+
+/* Randomize particle positions */
+.particle:nth-child(1) { top: 10%; left: 20%; animation-duration: 8s; }
+.particle:nth-child(2) { top: 50%; left: 70%; animation-duration: 12s; }
+.particle:nth-child(3) { top: 30%; left: 40%; animation-duration: 10s; }
+.particle:nth-child(4) { top: 80%; left: 10%; animation-duration: 9s; }
+.particle:nth-child(5) { top: 60%; left: 90%; animation-duration: 11s; }
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    position: relative;
+}
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.modal input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.save-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+}
+.logout-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: none;
+}
+.profile-btn {
+    background-color: #ff9800;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.profile-btn:hover {
+    background-color: #e68900;
+}
+
+      
     </style>
 </head>
 <body>
     <header>
-        <h1>Marvel Movie Dashboard</h1>
-        <a href="{% url 'add_movie' %}" class="add-movie-btn">➕ Add Movie</a>
+        <h1 style="font-size: 20px;">Marvel Movie Dashboard</h1>
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="{% url 'dashboard' %}">Home</a>
+                <a href="#">Top Rated</a>
+                <a href="#">Upcoming</a>
+                <a href="#">My Collection</a>
+                <a href="add_movie">Add Movies</a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search movies..." id="searchInput" onkeyup="searchMovies()">
+                
+            </div>
+        </div>
+        
     </header>
-    <main>
+    
+    <div class="sidebar">
+       
+        <a href="#">All Movies</a>
+        <a href="#">Genres</a>
+        <a href="#">Directors</a>
+        <a href="{% url 'budget_comparison' %}">Statistics</a>
+        <a href="{% url 'add_movie' %}">Add Movies</a>
+        
+        
+    </div>
+    
+    <div class="content">
         <div class="movie-container" id="movieContainer">
             {% for movie in movies %}
             <div class="movie-card">
-                <img src="{{ movie.image_url }}" alt="{{ movie.name }} Poster">
-                <h2>{{ movie.name }}</h2>
-                <p><strong>Director:</strong> {{ movie.director }}</p>
-                <p><strong>Budget:</strong> ${{ movie.budget }}M</p>
-                <a href="{% url 'delete_movie' movie.id %}" class="delete-btn">Delete</a>
-
+                <a href="{% url 'redi' movie.id %}"> 
+                    <img src="{{ movie.image_url }}" alt="{{ movie.name }} Poster">
+                    <h2 style="font-size: 18px;">{{ movie.name }}</h2>
+                    <p><strong>Director:</strong> {{ movie.director }}</p>
+                    <p><strong>Budget:</strong> ${{ movie.budget }}M</p>
+                </a>
+                {% if request.user.is_authenticated and request.user.role == "Admin" %}
+                    <a href="{% url 'delete_movie' movie.id %}" class="delete-btn">Delete</a>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
-    </main>
+    </div>
+    
+
+    
+  
+    
+        
+    <script>
+       function searchMovies() {
+    let query = document.getElementById("searchInput").value.toLowerCase();
+    let movies = document.querySelectorAll(".movie-card");
+
+    movies.forEach(movie => {
+        let title = movie.textContent.toLowerCase();
+        if (title.includes(query)) {
+            movie.style.display = "block";
+        } else {
+            movie.style.display = "none";
+        }
+    });
+}
+    
+        // Create floating particles dynamically
+        document.addEventListener("DOMContentLoaded", function () {
+            const particlesContainer = document.querySelector('.particles');
+            for (let i = 0; i < 30; i++) {
+                let particle = document.createElement("div");
+                particle.classList.add("particle");
+                particle.style.width = `${Math.random() * 5 + 5}px`;
+                particle.style.height = particle.style.width;
+                particle.style.top = `${Math.random() * 100}vh`;
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.animationDuration = `${Math.random() * 5 + 3}s`;
+                particlesContainer.appendChild(particle);
+            }
+        });
+
+particlesJS("particles-js", {
+    particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3, random: true },
+        size: { value: 3, random: true },
+        move: { enable: true, speed: 1, direction: "none", random: false, out_mode: "out" }
+    },
+    interactivity: {
+        events: {
+            onhover: { enable: true, mode: "repulse" }
+        }
+    },
+    retina_detect: true
+});
+</script>
+
+<div class="particles-container">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
 </body>
 </html>
